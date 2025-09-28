@@ -313,6 +313,7 @@ export default class LaboratoryPage {
   }
 }
 
+
 LoginPage_-->
 import{ test, Locator, Page } from '@playwright/test'
 
@@ -722,28 +723,32 @@ export default class SubstorePage {
     this.page = page;
     this.subStoreLink = page.locator('//span[text()="SubStore"]');
     this.wardSupply = page.locator('//a[text()="Ward Supply"]');
-    this.accounts = page.locator('//i[text()="Accounts"]/..');
+    this.accounts = page.locator('//*[text()="Accounts"]/..');
     this.pharmacy = page.locator('//a[text()=" Pharmacy "]/..');
     this.inventory = page.locator('//a[text()=" Inventory "]/..');
     this.inventoryRequisition = page.locator('//a[text()="Inventory Requisition"]/..');
     this.consumption = page.locator('//a[text()="Consumption"]');
     this.reports = page.locator('//a[text()="Reports"]');
-    this.patientConsumption = page.locator('//a[text()="PatientConsumpion"]');
+    this.patientConsumption = page.locator('//a[text()="Patient Consumption"]');
     this.return = page.locator('//a[text()="Return"]');
     this.stock = page.locator('//a[text()="Stock"]');
   }
 
   // Getter methods to access private properties
   public getPharmacy() {
-    return this.page.locator('//a[text()=" Pharmacy "]/..');
+    // return this.page.locator('//a[text()=" Pharmacy "]/..');
+    return this.pharmacy;
   }
 
   public getInventory() {
-    return this.page.locator('//a[text()=" Inventory "]/..');
+    // return this.page.locator('//a[text()=" Inventory "]/..');
+    return this.inventory;
+
   }
 
   public getAccounts() {
-    return this.page.locator('//a[text()=" accounts "]/..')
+    // return this.page.locator('//a[text()=" Accounts "]/..');
+    return this.accounts;
   }
 
   /**
@@ -795,9 +800,15 @@ export default class SubstorePage {
   async verifyNavigationToSubStoreModule() {
 
     await this.subStoreLink.click();
-    await this.accounts.click();
+    // await this.accounts.click();
     await this.inventory.click();
-    
+
+    await this.stock.click();
+    await this.inventoryRequisition.click();
+    await this.consumption.click();
+    await this.reports.click();
+    await this.patientConsumption.click();
+    await this.return.click();
   }
 
   /**
@@ -828,7 +839,12 @@ export default class SubstorePage {
    * 3. Wait for the page to fully load after the action.
    * 4. Pause execution for 1 second to ensure the section is ready for interaction.
    */
-  async verifyNavigationToStock() {
+  async verifyNavigationToStock(): Promise<void> {
+    await this.stock.highlight();
+    await this.stock.click();
+    await this.page.waitForTimeout(1000);
+
+  
   }
 
   /**
@@ -842,7 +858,10 @@ export default class SubstorePage {
    * 3. Wait for the page to fully load after the action.
    * 4. Pause execution for 1 second to ensure the section is ready for interaction.
    */
-  async verifyNavigationToInventoryRequisition() {
+  async verifyNavigationToInventoryRequisition(): Promise<void> {
+      await this.inventoryRequisition.highlight();
+      await this.inventoryRequisition.click();
+      await this.page.waitForTimeout(1000);
   }
 
   /**
@@ -856,7 +875,10 @@ export default class SubstorePage {
    * 3. Wait for the page to fully load after the action.
    * 4. Pause execution for 1 second to ensure the section is ready for interaction.
    */
-  async verifyNavigationToConsumptions() {
+  async verifyNavigationToConsumptions(): Promise<void> {
+    await this.consumption.highlight();
+    await this.consumption.click();
+    await this.page.waitForTimeout(1000);
   }
 
   /**
@@ -870,7 +892,10 @@ export default class SubstorePage {
    * 3. Wait for the page to fully load after the action.
    * 4. Pause execution for 1 second to ensure the section is ready for interaction.
    */
-  async verifyNavigationToReports() {
+  async verifyNavigationToReports(): Promise<void> {
+    await this.reports.highlight();
+    await this.reports.click();
+    await this.page.waitForTimeout(1000);
   }
 
   /**
@@ -884,7 +909,10 @@ export default class SubstorePage {
    * 3. Wait for the page to fully load after the action.
    * 4. Pause execution for 1 second to ensure the section is ready for interaction.
    */
-  async verifyNavigationToPatientConsumptions() {
+  async verifyNavigationToPatientConsumptions() : Promise<void> {
+    await this.patientConsumption.highlight();
+    await this.patientConsumption.click();
+    await this.page.waitForTimeout(1000);
   }
 
   /**
@@ -898,7 +926,10 @@ export default class SubstorePage {
    * 3. Wait for the page to fully load after the action.
    * 4. Pause execution for 1 second to ensure the section is ready for interaction.
    */
-  async verifyNavigationToReturn() {
+  async verifyNavigationToReturn() : Promise<void> {
+    await this.return.highlight();
+    await this.return.click();
+    await this.page.waitForTimeout(1000);
   }
 
   /**
@@ -932,6 +963,7 @@ export default class SubstorePage {
     return buffer;
   }
 }
+
 
 utilitiesPage-->
 import { test, Locator, Page } from '@playwright/test'
